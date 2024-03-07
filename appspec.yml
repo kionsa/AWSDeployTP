@@ -1,0 +1,23 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/murex/testpack
+hooks:
+  BeforeInstall:
+    - location: Deployment/Scripts/dummy.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: Deployment/Scripts/dummy.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: Deployment/Scripts/dummy.sh
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: Deployment/Scripts/dummy.sh
+      timeout: 300
+      runas: root
+      
