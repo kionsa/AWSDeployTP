@@ -1,0 +1,50 @@
+name: Build and Deploy
+
+on:
+  workflow_dispatch: {}
+
+env:
+  applicationfolder: /
+  AWS_REGION: af-south-1
+  S3BUCKET: githubworkflow-af-south-1-deploy 
+
+
+jobs:
+  build:
+    name: Package the testpack
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout Repository
+
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
+          role-session-name: GitHub-Action-Role
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Upload testpacks to s3
+        working-directory: ${{ env.applicationfolder }}/target
+        run: aws s3 cp *.war s3://${{ env.S3BUCKET }}/
+        
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: Dev
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - uses: actions/checkout@v2
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
+        role-session-name: GitHub-Action-Role
+        aws-region: ${{ env.AWS_REGION }}
+    - run: |
+        echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
+        commit_hash=`git rev-parse HEAD`
+        aws deploy create-deployment --application-name mxtest_repo --deployment-group-name testpackdeployment --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
