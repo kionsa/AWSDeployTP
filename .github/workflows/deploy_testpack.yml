@@ -34,6 +34,16 @@ jobs:
         id: package
         run: $GITHUB_WORKSPACE/Deployment/Scripts/build.sh
 
+      - name: folder to tar zip
+        uses: a7ul/tar-action@v1.1.0
+        id: compress
+        with:
+          command: c
+          cwd: ${{ env.deploymentfolder }}/Packages
+          files: |
+            ${{ env.applicationfolder }}
+          outPath: artifact.tar.gz
+
       - name: Upload testpacks to s3
         working-directory: ${{ env.deploymentfolder }}/Packages
         run: aws s3 cp *.tar.gz s3://${{ env.S3BUCKET }}/source --recursive
