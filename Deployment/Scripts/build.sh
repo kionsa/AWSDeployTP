@@ -2,5 +2,7 @@
 
 tar -czvf artifact.tar.gz spring-boot-hello-world-example
 ls
-mv artifact.tar.gz Deployment/Packages
+mv *.tar.gz Deployment/Packages/
 ls 
+echo "inside"
+ls Deployment/Packages
