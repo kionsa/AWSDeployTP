@@ -26,6 +26,9 @@ jobs:
           role-session-name: GitHub-Action-Role
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: chmod
+        run: chmod -R +x ./Deployment/Scripts
+
       - name: Build and Package testpack
         id: package
         working-directory: ${{ env.applicationfolder }}
