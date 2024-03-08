@@ -35,7 +35,7 @@ jobs:
         run: $GITHUB_WORKSPACE/Deployment/Scripts/build.sh
 
       - name: Upload testpacks to s3
-        working-directory: ${{ env.deploymentfolder }}/Packages
+        working-directory: ${{ env.applicationfolder }}
         run: aws s3 cp *.tar.gz s3://${{ env.S3BUCKET }}/source --recursive
         
   deploy:
