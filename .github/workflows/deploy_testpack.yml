@@ -5,6 +5,7 @@ on:
 
 env:
   applicationfolder: spring-boot-hello-world-example
+  deploymentfolder: Deployment
   AWS_REGION: af-south-1
   S3BUCKET: githubworkflow-af-south-1-deploy 
 
@@ -34,7 +35,7 @@ jobs:
         run: $GITHUB_WORKSPACE/Deployment/Scripts/build.sh
 
       - name: Upload testpacks to s3
-        working-directory: ${{ env.applicationfolder }}
+        working-directory: ${{ env.deploymentfolder }}/Packages
         run: aws s3 cp *.tar.gz s3://${{ env.S3BUCKET }}/source
         
   deploy:
