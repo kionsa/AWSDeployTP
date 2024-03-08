@@ -36,7 +36,7 @@ jobs:
 
       - name: Upload testpacks to s3
         working-directory: ${{ env.deploymentfolder }}/Packages
-        run: aws s3 cp *.tar.gz s3://${{ env.S3BUCKET }}/source
+        run: aws s3 cp *.tar.gz s3://${{ env.S3BUCKET }}/source --recursive
         
   deploy:
     needs: build
