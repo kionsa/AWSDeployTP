@@ -2,4 +2,4 @@
 
 tar -czvf artifact.tar.gz spring-boot-hello-world-example
 
-mv *.tar.gz Deployment/Packages/
+cp -R *.tar.gz Deployment/Packages/
