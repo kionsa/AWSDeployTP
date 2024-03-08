@@ -31,7 +31,8 @@ jobs:
 
       - name: Build and Package testpack
         id: package
-        run: ./Deployment/Scripts/build.sh
+        working-directory: ${{ env.applicationfolder }}
+        run: $GITHUB_WORKSPACE/Deployment/Scripts/build.sh
 
       - name: Upload testpacks to s3
         working-directory: ${{ env.applicationfolder }}
