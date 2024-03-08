@@ -28,7 +28,7 @@ jobs:
 
       - name: Upload testpacks to s3
         working-directory: ${{ env.applicationfolder }}
-        run: aws s3 cp ../${{ env.applicationfolder }} s3://${{ env.S3BUCKET }}/
+        run: aws s3 cp ../${{ env.applicationfolder }} s3://${{ env.S3BUCKET }}/ --recursive
         
   deploy:
     needs: build
