@@ -1,4 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "running mxtest kion setup script"
-sleep 10
+echo "the setup script is running on kion environment"
