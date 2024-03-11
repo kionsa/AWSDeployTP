@@ -37,7 +37,7 @@ jobs:
       - name: Upload testpacks to s3
         working-directory: ${{ env.deploymentfolder }}/Packages
         run: |
-             ls
+             ls -l
              aws s3 cp ./artifact.tar.gz s3://${{ env.S3BUCKET }}/source 
         
   deploy:
