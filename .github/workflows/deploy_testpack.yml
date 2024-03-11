@@ -38,7 +38,7 @@ jobs:
         working-directory: ${{ env.deploymentfolder }}/Packages
         run: |
              ls
-             aws s3 cp artifact.tar.gz s3://${{ env.S3BUCKET }}/source --recursive
+             aws s3 cp *.tar.gz s3://${{ env.S3BUCKET }}/source --recursive
         
   deploy:
     needs: build
