@@ -12,12 +12,4 @@ hooks:
     - location: Deployment/Scripts/dummy.sh
       timeout: 300
       runas: root
-  ApplicationStart:
-    - location: Deployment/Scripts/dummy.sh
-      timeout: 300
-      runas: root
-  ApplicationStop:
-    - location: Deployment/Scripts/dummy.sh
-      timeout: 300
-      runas: root
       
